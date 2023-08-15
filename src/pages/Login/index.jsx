@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Flex } from "@chakra-ui/layout";
 import { Text, Divider, Button } from "@chakra-ui/react";
-import { CalendarIcon, EmailIcon, LockIcon } from '@chakra-ui/icons';
+import { EmailIcon, LockIcon } from '@chakra-ui/icons';
 import { Form, Formik } from 'formik';
 import * as Yup from "yup";
 import Auth from "../../services/Auth.js";
 import { useNavigate } from "react-router-dom";
-import CustomInput from '../../components/CustomInput/index.js';
-import { BiUserCircle, BiNews } from "react-icons/bi";
+import CustomInput from '../../components/CustomInput/index.jsx';
 
-const Register = () => {
+const Login = () => {
   const navigate = useNavigate();
   const isAuth = Auth.isAuth();
 
@@ -17,13 +16,7 @@ const Register = () => {
 
   const handleClick = () => setShow(!show)
 
-  const initialValues = { 
-    email: "", 
-    password: "",
-    name: "",
-    cpf: "",
-    birthdate: "",
-  };
+  const initialValues = { email: "", password: "" };
 
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -32,22 +25,11 @@ const Register = () => {
     password: Yup.string()
       .required("O campo senha é obrigatório.")
       .min(6, "Senha muito curta."),
-    name: Yup.string()
-      .required("O campo nome é obrigatório."),
-      cpf: Yup.string()
-      .required("O campo CPF é obrigatório.")
-      .min(8),
-      birthdate: Yup.date()
-      .required("O campo data de nascimento é obrigatório."),
   });
 
-  const registerHandle = (values) => {
-    values.birthdate = new Date(values.birthdate)
+  const loginHandle = (values) => {
     console.log(values)
-    Auth.register(
-      values,
-      navigate
-    );
+    Auth.signIn(values.email, values.password, navigate);
   };
 
   useEffect(() => {
@@ -61,7 +43,7 @@ const Register = () => {
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={(values) => registerHandle(values)}
+      onSubmit={(values) => loginHandle(values)}
     >
       {({ handleSubmit, errors, touched, isValid, dirty }) => (
         <Flex
@@ -102,60 +84,14 @@ const Register = () => {
               flexDirection="column"
               alignItems="flex-start"
               justifyContent="flex-start"
-              mt="3rem"
-              overflowY="auto"
-              maxH="450px"
-              marginBottom="2rem"
-              px={2}
-              sx={{
-                "&::-webkit-scrollbar": {
-                  marginLeft: "1rem",
-                  width: "4px",
-                },
-                "&::-webkit-scrollbar-track": {
-                  background: "#f1f1f1",
-                },
-                "&::-webkit-scrollbar-thumb": {
-                  background: "#088395",
-                  borderRadius: "4px",
-                },
-                "&::-webkit-scrollbar-thumb:hover": {
-                  background: "#0A4D68",
-                },
-              }}
+              pt="3rem"
             >
               <CustomInput
-                label="Nome"
-                icon={<BiUserCircle className='custom-icon' />}
-                name="name"
-                type="text"
-                placeholder="Digite seu nome completo"
-                height={'54px'}
-                borderWidth=".2rem"
-                borderRadius="30px"
-                touched={touched}
-                errors={errors}
-              />
-
-              <CustomInput
                 label="E-mail"
-                icon={<EmailIcon color='gray.500' className='custom-icon' />}
+                icon={<EmailIcon className='custom-icon' color='gray.500' />}
                 name="email"
                 type="email"
-                placeholder="Digite email para cadastro"
-                height={'54px'}
-                borderWidth=".2rem"
-                borderRadius="30px"
-                touched={touched}
-                errors={errors}
-              />
-
-              <CustomInput
-                label="CPF"
-                icon={<BiNews color='gray.500' className='custom-icon' />}
-                name="cpf"
-                type="text"
-                placeholder="Digite CPF para cadastro"
+                placeholder="Digite email para login"
                 height={'54px'}
                 borderWidth=".2rem"
                 borderRadius="30px"
@@ -168,7 +104,7 @@ const Register = () => {
                 icon={<LockIcon className='custom-icon' color='gray.500' />}
                 name="password"
                 type="password"
-                placeholder="Digite sua senha para cadastro"
+                placeholder="Digite sua senha"
                 height={'54px'}
                 borderWidth=".2rem"
                 borderRadius="30px"
@@ -177,19 +113,13 @@ const Register = () => {
                 touched={touched}
                 errors={errors}
               />
-
-              <CustomInput
-                label="Data de Nascimento"
-                icon={<CalendarIcon className='custom-icon' color='gray.500' />}
-                name="birthdate"
-                type="date"
-                placeholder="Selecione sua data de nascimento"
-                height={'54px'}
-                borderWidth=".2rem"
-                borderRadius="30px"
-                touched={touched}
-                errors={errors}
-              />
+            </Flex>
+            <Flex justifyContent="flex-end" marginBottom="2rem" width="70%">
+              <Button variant="link">
+                <Text as='u' fontWeight="bold" color="primary.600">
+                  Esqueceu a senha?
+                </Text>
+              </Button>
             </Flex>
             <Button
               type="submit"
@@ -211,21 +141,21 @@ const Register = () => {
               mb="2rem"
               fontSize="2xl"
             >
-              Cadastrar
+              Login
             </Button>
             <Text
               color="primary.500"
               mb="2rem"
             > 
-              Já possui uma conta? &nbsp;
+              Não tem uma conta? &nbsp;
               <Text
                 as='u'
                 fontWeight="bold"
                 color="primary.600"
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/register")}
                 cursor="pointer"
               >
-                Entre
+                Cadastre-se
               </Text>
             </Text>
           </Flex>
@@ -236,4 +166,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default Login
