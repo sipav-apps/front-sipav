@@ -12,6 +12,8 @@ class Auth {
       const { token } = data;
 
       localStorage.setItem("@sipavAccessToken", token);
+      localStorage.setItem("@sipavUser", data.userExists.name);
+
       api.defaults.headers.authorization = `Token ${token}`;
 
       navigate(PathRoutes.HOME, {
@@ -39,6 +41,7 @@ class Auth {
 
       
       localStorage.setItem("@sipavAccessToken", token);
+      localStorage.setItem("@sipavUser", data.name);
       api.defaults.headers.authorization = `Token ${token}`;
       
       navigate(PathRoutes.HOME, {
@@ -52,7 +55,7 @@ class Auth {
   async signOut() {
     api.defaults.headers.authorization = "";
     localStorage.removeItem("@sipavAccessToken");
-    localStorage.removeItem("@sipavRefreshToken");
+    localStorage.removeItem("@sipavUser");
     window.location.href = PathRoutes.LOGIN;
   }
 
