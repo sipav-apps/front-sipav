@@ -1,13 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 import PathRoutes from "./PathRoutes";
 import Login from "../pages/Login";
-import List from "../pages/user/create";
-import Create from "../pages/user/create";
+import Register from "../pages/Register";
 
 const RoutesComponent = () => {
   return (
     <Routes>
       <Route exect path={PathRoutes.LOGIN} element={<Login />} />
+
+      <Route exect path={PathRoutes.REGISTER} element={<Register />} />
     </Routes>
   )
 }
