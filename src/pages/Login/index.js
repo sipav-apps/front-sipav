@@ -84,11 +84,11 @@ const Login = () => {
               flexDirection="column"
               alignItems="flex-start"
               justifyContent="flex-start"
-              pt="2rem"
+              pt="3rem"
             >
               <CustomInput
                 label="E-mail"
-                icon={<EmailIcon color='gray.300' />}
+                icon={<EmailIcon className='custom-icon' color='gray.500' />}
                 name="email"
                 type="email"
                 placeholder="Digite email para login"
@@ -101,7 +101,7 @@ const Login = () => {
 
               <CustomInput
                 label="Senha"
-                icon={<LockIcon color='gray.300' />}
+                icon={<LockIcon className='custom-icon' color='gray.500' />}
                 name="password"
                 type="password"
                 placeholder="Digite sua senha"
@@ -114,7 +114,7 @@ const Login = () => {
                 errors={errors}
               />
             </Flex>
-            <Flex justifyContent="flex-end" marginBottom="1rem" width="70%">
+            <Flex justifyContent="flex-end" marginBottom="2rem" width="70%">
               <Button variant="link">
                 <Text as='u' fontWeight="bold" color="primary.600">
                   Esqueceu a senha?
@@ -153,6 +153,7 @@ const Login = () => {
                 fontWeight="bold"
                 color="primary.600"
                 onClick={() => navigate("/register")}
+                cursor="pointer"
               >
                 Cadastre-se
               </Text>
