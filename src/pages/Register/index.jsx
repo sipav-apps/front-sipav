@@ -47,11 +47,9 @@ const Register = () => {
   });
 
   const registerHandle = (values) => {
-    console.log(values.phoneNumber);
     values.birthdate = new Date(values.birthdate)
     values.phoneNumber = String(values.phoneNumber)
     setUsername(values.name)
-    console.log(values)
     Auth.register(
       values,
       navigate
@@ -249,7 +247,7 @@ const Register = () => {
                     alignItems="center"
                     justifyContent="center"
                   >
-                    <Text
+                    {/* <Text
                       fontSize="24px"
                       color="primary.600"
                       fontWeight="semibold"
@@ -258,7 +256,7 @@ const Register = () => {
                       top="-8rem"
                     >
                       {username}
-                    </Text>
+                    </Text> */}
                     <Text
                       fontSize="24px"
                       color="primary.600"

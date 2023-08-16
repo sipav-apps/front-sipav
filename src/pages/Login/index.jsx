@@ -28,7 +28,6 @@ const Login = () => {
   });
 
   const loginHandle = (values) => {
-    console.log(values)
     Auth.signIn(values.email, values.password, navigate);
   };
 
@@ -40,128 +39,128 @@ const Login = () => {
 
   return (
     <>
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={(values) => loginHandle(values)}
-    >
-      {({ handleSubmit, errors, touched, isValid, dirty }) => (
-        <Flex
-          backgroundColor="primary.500"
-          alignItems="center"
-          justifyContent="center"
-          h={"100vh"}
-          w={"100vw"}
-        >
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={(values) => loginHandle(values)}
+      >
+        {({ handleSubmit, errors, touched, isValid, dirty }) => (
           <Flex
-            as={Form}
-            backgroundColor="#F0F1F3"
-            width="36%"
-            pt={"2rem"}
-            borderRadius="30px"
-            flexDirection="column"
+            backgroundColor="primary.500"
             alignItems="center"
-            boxShadow="dark-lg"
-            onSubmit={handleSubmit}
+            justifyContent="center"
+            h={"100vh"}
+            w={"100vw"}
           >
-            <Text
-              fontSize="5xl"
-              color="primary.600"
-              fontWeight="semibold"
-              pb=".5rem"
-            >
-              SIPAV
-            </Text>
-            <Divider
-              borderColor="primary.600"
-              backgroundColor="primary.600"
-              borderWidth=".2rem"
-              w={"15%"}
-            />
             <Flex
-              height="50%"
-              width="70%"
-              flexDirection="column"
-              alignItems="flex-start"
-              justifyContent="flex-start"
-              pt="3rem"
-            >
-              <CustomInput
-                label="E-mail"
-                icon={<EmailIcon className='custom-icon' color='gray.500' />}
-                name="email"
-                type="email"
-                placeholder="Digite email para login"
-                height={'54px'}
-                borderWidth=".2rem"
-                borderRadius="30px"
-                touched={touched}
-                errors={errors}
-              />
-
-              <CustomInput
-                label="Senha"
-                icon={<LockIcon className='custom-icon' color='gray.500' />}
-                name="password"
-                type="password"
-                placeholder="Digite sua senha"
-                height={'54px'}
-                borderWidth=".2rem"
-                borderRadius="30px"
-                show={show}
-                handleClick={handleClick}
-                touched={touched}
-                errors={errors}
-              />
-            </Flex>
-            <Flex justifyContent="flex-end" marginBottom="2rem" width="70%">
-              <Button variant="link">
-                <Text as='u' fontWeight="bold" color="primary.600">
-                  Esqueceu a senha?
-                </Text>
-              </Button>
-            </Flex>
-            <Button
-              type="submit"
-              h="3rem"
-              w="10rem"
+              as={Form}
+              backgroundColor="#F0F1F3"
+              width="36%"
+              pt={"2rem"}
               borderRadius="30px"
-              borderColor="primary.600"
-              borderWidth=".2rem"
-              isDisabled={!isValid || !dirty}
-              color="primary.600"
-              variant="solid"
-              marginTop="1rem"
-              backgroundColor="transparent" // Defina a cor de fundo desejada
-              transition="background-color 0.3s, color 0.3s" // Adicione uma transição suave
-              _hover={{
-                backgroundColor: "primary.600", // Cor de fundo ao passar o mouse
-                color: "#F0F1F3", // Cor do texto ao passar o mouse
-              }}
-              mb="2rem"
-              fontSize="2xl"
+              flexDirection="column"
+              alignItems="center"
+              boxShadow="dark-lg"
+              onSubmit={handleSubmit}
             >
-              Login
-            </Button>
-            <Text
-              color="primary.500"
-              mb="2rem"
-            > 
-              Não tem uma conta? &nbsp;
               <Text
-                as='u'
-                fontWeight="bold"
+                fontSize="5xl"
                 color="primary.600"
-                onClick={() => navigate("/register")}
-                cursor="pointer"
+                fontWeight="semibold"
+                pb=".5rem"
               >
-                Cadastre-se
+                SIPAV
               </Text>
-            </Text>
+              <Divider
+                borderColor="primary.600"
+                backgroundColor="primary.600"
+                borderWidth=".2rem"
+                w={"15%"}
+              />
+              <Flex
+                height="50%"
+                width="70%"
+                flexDirection="column"
+                alignItems="flex-start"
+                justifyContent="flex-start"
+                pt="3rem"
+              >
+                <CustomInput
+                  label="E-mail"
+                  icon={<EmailIcon className='custom-icon' color='gray.500' />}
+                  name="email"
+                  type="email"
+                  placeholder="Digite email para login"
+                  height={'54px'}
+                  borderWidth=".2rem"
+                  borderRadius="30px"
+                  touched={touched}
+                  errors={errors}
+                />
+
+                <CustomInput
+                  label="Senha"
+                  icon={<LockIcon className='custom-icon' color='gray.500' />}
+                  name="password"
+                  type="password"
+                  placeholder="Digite sua senha"
+                  height={'54px'}
+                  borderWidth=".2rem"
+                  borderRadius="30px"
+                  show={show}
+                  handleClick={handleClick}
+                  touched={touched}
+                  errors={errors}
+                />
+              </Flex>
+              <Flex justifyContent="flex-end" marginBottom="2rem" width="70%">
+                <Button variant="link">
+                  <Text as='u' fontWeight="bold" color="primary.600">
+                    Esqueceu a senha?
+                  </Text>
+                </Button>
+              </Flex>
+              <Button
+                type="submit"
+                h="3rem"
+                w="10rem"
+                borderRadius="30px"
+                borderColor="primary.600"
+                borderWidth=".2rem"
+                isDisabled={!isValid || !dirty}
+                color="primary.600"
+                variant="solid"
+                marginTop="1rem"
+                backgroundColor="transparent" // Defina a cor de fundo desejada
+                transition="background-color 0.3s, color 0.3s" // Adicione uma transição suave
+                _hover={{
+                  backgroundColor: "primary.600", // Cor de fundo ao passar o mouse
+                  color: "#F0F1F3", // Cor do texto ao passar o mouse
+                }}
+                mb="2rem"
+                fontSize="2xl"
+              >
+                Login
+              </Button>
+              <Text
+                color="primary.500"
+                mb="2rem"
+              >
+                Não tem uma conta? &nbsp;
+                <Text
+                  as='u'
+                  fontWeight="bold"
+                  color="primary.600"
+                  onClick={() => navigate("/register")}
+                  cursor="pointer"
+                >
+                  Cadastre-se
+                </Text>
+              </Text>
+            </Flex>
           </Flex>
-        </Flex>
-      )}
-    </Formik>
+        )}
+      </Formik>
     </>
   )
 }

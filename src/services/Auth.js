@@ -20,7 +20,6 @@ class Auth {
         replace: true,
       });
     } catch (error) {
-      console.log('entrou')
       throw error;
     }
   }
@@ -29,7 +28,6 @@ class Auth {
     data,
     navigate, 
   ) {
-    console.log(data);
     try {
       await api.post("user/", {
         ...data,
