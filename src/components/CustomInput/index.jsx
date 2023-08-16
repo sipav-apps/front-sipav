@@ -1,10 +1,19 @@
 import React from 'react'
-import { Input, InputLeftElement, InputGroup, InputRightElement, Button, FormControl, FormLabel, FormErrorMessage } from "@chakra-ui/react";
+import {
+  Input,
+  InputLeftElement,
+  InputGroup,
+  InputRightElement,
+  Button,
+  FormControl,
+  FormLabel,
+  FormErrorMessage
+} from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { Field } from 'formik';
 import "./customInput.css";
-  
-const CustomInput = ({ icon, label, type, show, handleClick, touched, errors,...props }) => {
+
+const CustomInput = ({ icon, label, type, show, handleClick, touched, errors, ...props }) => {
   return (
     <Field name={props.name}>
       {({ field, form }) => (
@@ -12,7 +21,7 @@ const CustomInput = ({ icon, label, type, show, handleClick, touched, errors,...
           isInvalid={form.errors[field.name] && form.touched[field.name]}
           pb="4"
         >
-          <FormLabel 
+          <FormLabel
             fontSize="xl"
             color="primary.600"
             mt=".5rem"

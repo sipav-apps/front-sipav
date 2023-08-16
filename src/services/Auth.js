@@ -29,11 +29,10 @@ class Auth {
     data,
     navigate, 
   ) {
+    console.log(data);
     try {
       await api.post("user/", {
         ...data,
-        phoneNumber: '',
-        telegram: '',
         isResponsible: false,
       });
 
