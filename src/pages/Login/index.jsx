@@ -24,7 +24,7 @@ const Login = () => {
       .required("O campo email é obrigatório."),
     password: Yup.string()
       .required("O campo senha é obrigatório.")
-      .min(6, "Senha muito curta."),
+      .min(8, "Senha muito curta."),
   });
 
   const loginHandle = (values) => {

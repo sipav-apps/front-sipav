@@ -31,7 +31,7 @@ class Auth {
     try {
       await api.post("user/", {
         ...data,
-        isResponsible: false,
+        isResponsible: true,
       });
 
       const { token } = data;

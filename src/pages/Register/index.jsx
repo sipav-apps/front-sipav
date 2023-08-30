@@ -36,7 +36,7 @@ const Register = () => {
       .required("O campo email é obrigatório."),
     password: Yup.string()
       .required("O campo senha é obrigatório.")
-      .min(6, "Senha muito curta."),
+      .min(8, "Senha muito curta."),
     name: Yup.string()
       .required("O campo nome é obrigatório."),
     cpf: Yup.string()
@@ -313,7 +313,7 @@ const Register = () => {
                       transition="background-color 0.3s, color 0.3s"
                       _hover={{
                         backgroundColor: "primary.600",
-                        color: "#F0F1F3", e
+                        color: "#F0F1F3"
                       }}
                       my="2rem"
                       fontSize="2xl"
