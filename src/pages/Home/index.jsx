@@ -1,8 +1,12 @@
-import { Flex, Button, Box, Text } from '@chakra-ui/react'
-import React from 'react'
+import { Flex, Button, Box, Text, Image } from '@chakra-ui/react'
+import React, { useState } from 'react'
 import Auth from "../../services/Auth.js";
+import menu from '../../assets/menu.png'
 
 const Home = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const toggleMenuState = () => setIsMenuOpen(!isMenuOpen);
+
   const currentUser = localStorage.getItem("@sipavUser");
   return (
     <Flex
@@ -12,29 +16,15 @@ const Home = () => {
       h={"100vh"}
       w={"100vw"}
     >
-      <Flex
-            backgroundColor="#F0F1F3"
-            width="80%"
-            py={"2rem"}
-            borderRadius="30px"
-            flexDirection="column"
-            alignItems="center"
-            boxShadow="dark-lg"
-      >
-        <Box>
-          <Text fontSize="3xl" mb="2rem">
-            Bem vindo, {currentUser}
-          </Text>
-        </Box>
-        <Button
-          colorScheme="red"
-          onClick={() => {
-            Auth.signOut();
-          }}
-        >
-          Sair
-        </Button>
-      </Flex>
+      <Image 
+        onClick={toggleMenuState} 
+        src={menu} 
+        alt='Hamburger menu' 
+        pos="absolute" 
+        top="5%" 
+        right="5%"
+        cursor={"pointer"}
+      />
     </Flex>
   )
 }

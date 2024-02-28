@@ -47,6 +47,7 @@ const Register = () => {
   });
 
   const registerHandle = (values) => {
+    console.log(values)
     values.birthdate = new Date(values.birthdate)
     values.phoneNumber = String(values.phoneNumber)
     setUsername(values.name)
