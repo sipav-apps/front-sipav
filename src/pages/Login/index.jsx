@@ -4,14 +4,16 @@ import { Text, Divider, Button } from "@chakra-ui/react";
 import { EmailIcon, LockIcon } from '@chakra-ui/icons';
 import { Form, Formik } from 'formik';
 import * as Yup from "yup";
-import Auth from "../../services/Auth.js";
 import { useNavigate } from "react-router-dom";
 import CustomInput from '../../components/CustomInput/index.jsx';
+import useAuth from '../../services/useAuth.jsx';
 
 const Login = () => {
   const navigate = useNavigate();
-  const isAuth = Auth.isAuth();
-
+  
+  const { isAuthenticated, signIn } = useAuth();
+  const isAuth = isAuthenticated;
+  
   const [show, setShow] = useState(false)
 
   const handleClick = () => setShow(!show)
@@ -28,7 +30,7 @@ const Login = () => {
   });
 
   const loginHandle = (values) => {
-    Auth.signIn(values.email, values.password, navigate);
+    signIn(values.email, values.password, navigate);
   };
 
   useEffect(() => {
@@ -61,7 +63,6 @@ const Login = () => {
               flexDirection="column"
               alignItems="center"
               boxShadow="dark-lg"
-              onSubmit={handleSubmit}
             >
               <Text
                 fontSize="5xl"

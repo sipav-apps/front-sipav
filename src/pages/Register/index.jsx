@@ -4,15 +4,17 @@ import { Text, Divider, Button, Grid, GridItem, Checkbox, CheckboxGroup } from "
 import { CalendarIcon, EmailIcon, LockIcon } from '@chakra-ui/icons';
 import { Form, Formik } from 'formik';
 import * as Yup from "yup";
-import Auth from "../../services/Auth.js";
 import { useNavigate } from "react-router-dom";
 import CustomInput from '../../components/CustomInput/index.jsx';
 import { BiUserCircle, BiNews } from "react-icons/bi";
 import { FaTelegram, FaWhatsapp } from "react-icons/fa6";
+import useAuth from '../../services/useAuth.jsx';
 
 const Register = () => {
   const navigate = useNavigate();
-  const isAuth = Auth.isAuth();
+  
+  const { isAuthenticated, register } = useAuth();
+  const isAuth = isAuthenticated();
 
   const [show, setShow] = useState(false)
   const [step, setStep] = useState(1)
@@ -47,11 +49,10 @@ const Register = () => {
   });
 
   const registerHandle = (values) => {
-    console.log(values)
     values.birthdate = new Date(values.birthdate)
     values.phoneNumber = String(values.phoneNumber)
     setUsername(values.name)
-    Auth.register(
+    register(
       values,
       navigate
     );
