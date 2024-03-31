@@ -1,13 +1,10 @@
-import { Flex, Button, Box, Text, Image } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import Auth from "../../services/Auth.js";
-import menu from '../../assets/menu.png'
+import { 
+  Flex,     
+} from '@chakra-ui/react'
+import CustomMenu from '../../components/CustomMenu/index.jsx';
 
 const Home = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const toggleMenuState = () => setIsMenuOpen(!isMenuOpen);
-
-  const currentUser = localStorage.getItem("@sipavUser");
   return (
     <Flex
       backgroundColor="primary.500"
@@ -16,15 +13,7 @@ const Home = () => {
       h={"100vh"}
       w={"100vw"}
     >
-      <Image 
-        onClick={toggleMenuState} 
-        src={menu} 
-        alt='Hamburger menu' 
-        pos="absolute" 
-        top="5%" 
-        right="5%"
-        cursor={"pointer"}
-      />
+    <CustomMenu  />
     </Flex>
   )
 }
