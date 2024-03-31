@@ -36,7 +36,6 @@ const useAuth = () => {
         phoneNumber: data.userExists.phoneNumber,
       }
 
-      console.log(userLogged)
       setUser(userLogged)
 
       navigate(PathRoutes.HOME, {

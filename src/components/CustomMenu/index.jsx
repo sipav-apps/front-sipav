@@ -50,7 +50,7 @@ const CustomMenu = ({ onClose }) => {
               fontWeight='soso' 
               fontSize='sm' 
               color="#F0F1F3" 
-              onClick={onClose}
+              onClick={() => navigate("/account")}
             >
               Perfil
             </Text>
@@ -59,7 +59,7 @@ const CustomMenu = ({ onClose }) => {
               fontWeight='soso' 
               fontSize='sm' 
               color="#F0F1F3" 
-              onClick={() => navigate("/account")}
+              onClick={onClose}
             > 
               Informações
             </Text>
