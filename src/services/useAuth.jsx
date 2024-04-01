@@ -22,27 +22,34 @@ const useAuth = () => {
 
       const { token } = data;
 
+      console.log(data)
       localStorage.setItem('@sipavAccessToken', token);
-      localStorage.setItem('@sipavUser', data.userExists.name);
-
+      localStorage.setItem('@sipavUser', JSON.stringify({
+        id: data.userExists.id,
+        email: data.userExists.email,
+        name: data.userExists.name,
+        cpf: data.userExists.cpf,
+        telegram: data.userExists.telegram,
+        phoneNumber: data.userExists.phoneNumber,
+      }));
+      
       api.defaults.headers.authorization = `Token ${token}`;
 
       const userLogged = {
         email: data.userExists.email,
         name: data.userExists.name,
         cpf: data.userExists.cpf,
-        birthdate: data.userExists.birthdate,
         telegram: data.userExists.telegram,
         phoneNumber: data.userExists.phoneNumber,
       }
 
       setUser(userLogged)
-
+      
+      setIsAuthenticated(true);
+      
       navigate(PathRoutes.HOME, {
         replace: true,
       });
-
-      setIsAuthenticated(true);
     } catch (error) {
       throw error;
     }
@@ -58,7 +65,14 @@ const useAuth = () => {
       const { token } = data;
 
       localStorage.setItem('@sipavAccessToken', token);
-      localStorage.setItem('@sipavUser', data.name);
+      localStorage.setItem('@sipavUser', JSON.stringify({
+        id: data.userExists.id,
+        email: data.userExists.email,
+        name: data.userExists.name,
+        cpf: data.userExists.cpf,
+        telegram: data.userExists.telegram,
+        phoneNumber: data.userExists.phoneNumber,
+      }));
       api.defaults.headers.authorization = `Token ${token}`;
 
       navigate(PathRoutes.HOME, {
@@ -70,6 +84,26 @@ const useAuth = () => {
       throw error;
     }
   };
+
+  const update = async (data) => {
+    try {
+      await api.put(`user/${data.id}`, {
+        ...data,
+        isResponsible: true,
+      });
+
+      localStorage.setItem('@sipavUser', JSON.stringify({
+        id: data.id,
+        email: data.email,
+        name: data.name,
+        cpf: data.cpf,
+        telegram: data.telegram,
+        phoneNumber: data.phoneNumber,
+      }));
+    } catch (error) {
+      throw error;
+    }
+  }
 
   const signOut = () => {
     api.defaults.headers.authorization = '';
@@ -83,6 +117,7 @@ const useAuth = () => {
     isAuthenticated,
     signIn,
     register,
+    update,
     signOut,
   };
 };
