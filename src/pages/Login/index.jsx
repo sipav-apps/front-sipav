@@ -13,7 +13,7 @@ const Login = () => {
   
   const { isAuthenticated, signIn } = useAuth();
   const isAuth = isAuthenticated;
-  
+
   const [show, setShow] = useState(false)
 
   const handleClick = () => setShow(!show)
@@ -134,9 +134,9 @@ const Login = () => {
                 marginTop="1rem"
                 backgroundColor="transparent" // Defina a cor de fundo desejada
                 transition="background-color 0.3s, color 0.3s" // Adicione uma transição suave
-                _hover={{
-                  backgroundColor: "primary.600", // Cor de fundo ao passar o mouse
-                  color: "#F0F1F3", // Cor do texto ao passar o mouse
+                _hover={(isValid && dirty) && {
+                  backgroundColor: "primary.600",
+                  color: "#F0F1F3",
                 }}
                 mb="2rem"
                 fontSize="2xl"

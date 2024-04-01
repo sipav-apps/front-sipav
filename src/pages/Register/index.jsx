@@ -14,11 +14,10 @@ const Register = () => {
   const navigate = useNavigate();
   
   const { isAuthenticated, register } = useAuth();
-  const isAuth = isAuthenticated();
+  const isAuth = isAuthenticated;
 
   const [show, setShow] = useState(false)
   const [step, setStep] = useState(1)
-  const [username, setUsername] = useState('')
 
   const handleClick = () => setShow(!show)
 
@@ -51,7 +50,6 @@ const Register = () => {
   const registerHandle = (values) => {
     values.birthdate = new Date(values.birthdate)
     values.phoneNumber = String(values.phoneNumber)
-    setUsername(values.name)
     register(
       values,
       navigate
@@ -213,7 +211,7 @@ const Register = () => {
                     marginTop="1rem"
                     backgroundColor="transparent"
                     transition="background-color 0.3s, color 0.3s"
-                    _hover={{
+                    _hover={(isValid && dirty) && {
                       backgroundColor: "primary.600",
                       color: "#F0F1F3",
                     }}
@@ -313,14 +311,21 @@ const Register = () => {
                       marginTop="1rem"
                       backgroundColor="transparent"
                       transition="background-color 0.3s, color 0.3s"
-                      _hover={{
+                      _hover={(isValid && dirty) && {
                         backgroundColor: "primary.600",
-                        color: "#F0F1F3"
+                        color: "#F0F1F3",
                       }}
                       my="2rem"
                       fontSize="2xl"
                     >
-                      Confirmar
+                      <Tooltip
+                        label="Você precisa alterar alguma informação"
+                        placement="top"
+                        hasArrow
+                        isOpen={dirty ? false : undefined} // Oculta o tooltip se o botão estiver "dirty"
+                      >
+                        Confirmar
+                      </Tooltip>
                     </Button>
                   </Flex>
                 )
