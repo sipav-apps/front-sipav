@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Flex, Text } from "@chakra-ui/layout";
+import { Flex, Text, Box } from "@chakra-ui/layout";
 import CustomForm from '../../components/CustomForm';
 import CustomInput from '../../components/CustomInput';
 import * as Yup from "yup";
@@ -65,6 +65,7 @@ const Profile = () => {
           alignItems="center"
           boxShadow="dark-lg"
           onSubmit={handleSubmit}
+          maxH={"90vh"}
         >
           <Flex
             justifyContent="space-between"
@@ -85,7 +86,7 @@ const Profile = () => {
             >
               Dados
             </Text>
-            <div></div>
+            <Box width="40px" height="40px"></Box>
           </Flex>
           <Flex
             height="50%"
@@ -199,7 +200,7 @@ const Profile = () => {
               backgroundColor: "primary.600",
               color: "#F0F1F3",
             }}
-            mb="2rem"
+            mb="1rem"
             fontSize="2xl"
           >
             <Tooltip
@@ -210,6 +211,27 @@ const Profile = () => {
             >
               Salvar
             </Tooltip>
+          </Button>
+          <Button
+            h="3rem"
+            w="60%"
+            borderRadius="30px"
+            borderColor="#E0E0E0"
+            borderWidth=".2rem"
+            color="#F0F1F3"
+            variant="solid"
+            marginTop="1rem"
+            backgroundColor="primary.600"
+            transition="background-color 0.3s, color 0.3s"
+            _hover={(isValid && dirty) && {
+              backgroundColor: "primary.600",
+              color: "#F0F1F3",
+            }}
+            mb="2rem"
+            fontSize="md"
+            onClick={() => navigate("/dependents")}
+          >
+            Gerenciar Dependentes
           </Button>
         </Flex>
         )}
