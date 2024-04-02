@@ -3,7 +3,8 @@ const PathRoutes = {
   REGISTER: "/register",
   HOME: "/",
   INFO: "/info",
-  PROFILE: "/account"
+  PROFILE: "/account",
+  DEPENDENTS: "/dependents",
 };
 
 export default PathRoutes;

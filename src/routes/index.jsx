@@ -5,6 +5,7 @@ import Register from "../pages/Register";
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
 import { Flex } from "@chakra-ui/react";
+import Dependents from "../pages/Dependents";
 
 const RoutesComponent = () => {
   return (
@@ -20,6 +21,7 @@ const RoutesComponent = () => {
           <Route exect path={PathRoutes.LOGIN} element={<Login />} />
           <Route exect path={PathRoutes.HOME} element={<Home />} />
           <Route exect path={PathRoutes.PROFILE} element={<Profile />} />
+          <Route exect path={PathRoutes.DEPENDENTS} element={<Dependents />} />
       </Routes>
     </Flex>
   )
