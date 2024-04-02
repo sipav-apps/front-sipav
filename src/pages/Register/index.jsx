@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Flex } from "@chakra-ui/layout";
-import { Text, Divider, Button, Grid, GridItem, Checkbox, CheckboxGroup } from "@chakra-ui/react";
+import { Text, Divider, Button, Grid, GridItem, Checkbox, CheckboxGroup, Tooltip } from "@chakra-ui/react";
 import { CalendarIcon, EmailIcon, LockIcon } from '@chakra-ui/icons';
 import { Form, Formik } from 'formik';
 import * as Yup from "yup";
@@ -87,6 +87,7 @@ const Register = () => {
               alignItems="center"
               boxShadow="dark-lg"
               onSubmit={handleSubmit}
+              maxH={"90vh"}
             >
               {step == 1 && (
                 <>

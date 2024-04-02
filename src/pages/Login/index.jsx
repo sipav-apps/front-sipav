@@ -88,7 +88,7 @@ const Login = () => {
               >
                 <CustomInput
                   label="E-mail"
-                  icon={<EmailIcon className='custom-icon' color='gray.500' />}
+                  icon={<EmailIcon color='gray.500' />}
                   name="email"
                   type="email"
                   placeholder="Digite email para login"
@@ -101,7 +101,7 @@ const Login = () => {
 
                 <CustomInput
                   label="Senha"
-                  icon={<LockIcon className='custom-icon' color='gray.500' />}
+                  icon={<LockIcon color='gray.500' />}
                   name="password"
                   type="password"
                   placeholder="Digite sua senha"
