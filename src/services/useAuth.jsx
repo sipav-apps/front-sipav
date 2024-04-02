@@ -31,6 +31,7 @@ const useAuth = () => {
         cpf: data.userExists.cpf,
         telegram: data.userExists.telegram,
         phoneNumber: data.userExists.phoneNumber,
+        dependents: data.userExists.dependents,
       }));
       
       api.defaults.headers.authorization = `Token ${token}`;
@@ -72,6 +73,7 @@ const useAuth = () => {
         cpf: data.userExists.cpf,
         telegram: data.userExists.telegram,
         phoneNumber: data.userExists.phoneNumber,
+        dependents: data.userExists.dependents,
       }));
       api.defaults.headers.authorization = `Token ${token}`;
 
