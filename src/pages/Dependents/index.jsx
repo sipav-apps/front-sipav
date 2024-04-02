@@ -1,21 +1,40 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/react'
 import { Form, Formik } from 'formik'
-import React from 'react'
+import React, { useRef } from 'react'
 import { BiSolidEdit, BiUserPin } from 'react-icons/bi'
 import { GoArrowLeft } from 'react-icons/go'
 import { useNavigate } from 'react-router-dom'
 import CustomBox from '../../components/CustomBox'
 import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
     ModalHeader,
     ModalFooter,
     ModalBody,
     ModalCloseButton,
 } from '@chakra-ui/react'
+import CustomModal from '../../components/CustomModal'
 
 const Dependents = () => {
+    const initialRef = useRef();
+    const finalRef = useRef();
+    const [isOpenEditModal, setIsOpenEditModal] = React.useState(false);
+    const [isOpenAddModal, setIsOpenAddModal] = React.useState(false);
+
+    const handleOpenEditModal = () => {
+        setIsOpenEditModal(true);
+    };
+
+    const handleCloseEditModal = () => {
+        setIsOpenEditModal(false);
+    };
+
+    const handleOpenAddModal = () => {
+        setIsOpenAddModal(true);
+    };
+
+    const handleCloseAddModal = () => {
+        setIsOpenAddModal(false);
+    };
+
     const navigate = useNavigate();
 
     const user = JSON.parse(localStorage.getItem("@sipavUser"));
@@ -93,6 +112,7 @@ const Dependents = () => {
                                 size={40}
                                 color='#088395'
                                 cursor={"pointer"}
+                                onClick={handleOpenEditModal}
                             />
                         }
                     />
@@ -114,12 +134,48 @@ const Dependents = () => {
                 }}
                 mb="2rem"
                 fontSize="md"
-                onClick={() => navigate("/dependents")}
+                onClick={handleOpenAddModal}
             >
                 Adicionar Dependente
             </Button>
-        </Flex>
+            {/* Modal de Edição */}
+            <CustomModal
+                isOpen={isOpenEditModal}
+                onClose={handleCloseEditModal}
+                initialRef={initialRef}
+                finalRef={finalRef}
+            >
+                <ModalHeader>Header</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                    Modal de edição
+                    <input ref={initialRef} />
+                    <input ref={finalRef} />
+                </ModalBody>
+                <ModalFooter>
+                    <Button onClick={handleCloseEditModal}>Close</Button>
+                </ModalFooter>
+            </CustomModal>
+            {/* Modal de Adição */}
+            <CustomModal
+                isOpen={isOpenAddModal}
+                onClose={handleCloseAddModal}
+                initialRef={initialRef}
+                finalRef={finalRef}
+            >
+                <ModalHeader>Header</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                    Modal de adição
+                    <Text ref={initialRef}>tttttttttt</Text>
+                    <Text ref={finalRef}>tttttttttt</Text>
 
+                </ModalBody>
+                <ModalFooter>
+                    <Button onClick={handleCloseAddModal}>Close</Button>
+                </ModalFooter>
+            </CustomModal>
+        </Flex>
     )
 }
 
