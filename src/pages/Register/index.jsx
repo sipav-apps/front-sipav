@@ -12,7 +12,7 @@ import useAuth from '../../services/useAuth.jsx';
 
 const Register = () => {
   const navigate = useNavigate();
-  
+
   const { isAuthenticated, register } = useAuth();
   const isAuth = isAuthenticated;
 
@@ -42,7 +42,7 @@ const Register = () => {
       .required("O campo nome é obrigatório."),
     cpf: Yup.string()
       .required("O campo CPF é obrigatório.")
-      .min(8),
+      .min(11),
     birthdate: Yup.date()
       .required("O campo data de nascimento é obrigatório."),
   });
