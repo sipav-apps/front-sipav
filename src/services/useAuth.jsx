@@ -91,7 +91,6 @@ const useAuth = () => {
     try {
       await api.put(`user/${data.id}`, {
         ...data,
-        isResponsible: true,
       });
 
       localStorage.setItem('@sipavUser', JSON.stringify({
