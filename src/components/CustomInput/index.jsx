@@ -14,6 +14,8 @@ import { Field } from 'formik';
 import "./customInput.css";
 
 const CustomInput = ({ icon, label, type, show, handleClick, touched, errors, ...props }) => {
+  const today = new Date().toISOString().slice(0, 10);
+
   return (
     <Field name={props.name}>
       {({ field, form }) => (
@@ -37,6 +39,7 @@ const CustomInput = ({ icon, label, type, show, handleClick, touched, errors, ..
               {...field}
               {...props}
               type={type === "password" ? (show ? "text" : "password") : type}
+              max={type === 'date' ? today : undefined} // Handle non-date types gracefully
             />
             {type === "password" && (
               <InputRightElement h="full" width="4.5rem">
