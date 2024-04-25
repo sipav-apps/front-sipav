@@ -1,12 +1,9 @@
 import { useState, useEffect, useContext } from 'react';
 import api from './Api';
 import PathRoutes from '../routes/PathRoutes';
-import UserContext from '../context/userContext';
 
 const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  const { user, setUser } = useContext(UserContext)
 
   useEffect(() => {
     // Verificar se o usuário está autenticado ao carregar o componente
@@ -43,8 +40,6 @@ const useAuth = () => {
         telegram: data.userExists.telegram,
         phoneNumber: data.userExists.phoneNumber,
       }
-
-      setUser(userLogged)
       
       setIsAuthenticated(true);
       
