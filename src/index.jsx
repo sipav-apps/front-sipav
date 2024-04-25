@@ -7,13 +7,14 @@ import themeVariables from "./config/Theme";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UserProvider } from "./context/userContext";
+import { DiseasesProvider } from "./context/diseasesContext";
 
 const theme = extendTheme(themeVariables);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <UserProvider>
+    <DiseasesProvider>
       <ChakraProvider theme={theme}>
         <BrowserRouter>
           <Routes />
@@ -30,6 +31,6 @@ root.render(
           />
         </BrowserRouter>
       </ChakraProvider>
-    </UserProvider>
+    </DiseasesProvider>
   </React.StrictMode>
 );
