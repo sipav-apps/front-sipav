@@ -43,37 +43,58 @@ const CustomMenu = ({ onClose }) => {
           pos="absolute" 
           top="6rem" 
           right="5%"
-          cursor={"pointer"}
           borderRadius="20px"
         >
-            <Text 
-              fontWeight='soso' 
-              fontSize='sm' 
-              color="#F0F1F3" 
+            <Flex
               onClick={() => navigate("/account")}
+              cursor={"pointer"}
+              w="90%"
+              h="30%"
+              justifyContent="center"
+              alignItems="center"
             >
-              Perfil
-            </Text>
+              <Text 
+                fontWeight='soso' 
+                fontSize='sm' 
+                color="#F0F1F3" 
+              >
+                Perfil
+              </Text>
+            </Flex>
             <Divider opacity={'inherit'} borderColor={'#F3F4F6'} borderWidth={".08rem"} w="60%"/>
-            <Text 
-              fontWeight='soso' 
-              fontSize='sm' 
-              color="#F0F1F3" 
+            <Flex 
               onClick={onClose}
-            > 
-              Informações
-            </Text>
+              cursor={"pointer"}
+              w="90%"
+              h="30%"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Text 
+                fontWeight='soso' 
+                fontSize='sm' 
+                color="#F0F1F3" 
+              > 
+                Informações
+              </Text>
+            </Flex>
             <Divider opacity={'unset'} borderColor={'#F3F4F6'} borderWidth={".08rem"} w="60%"/>
-            <Text 
-              fontWeight='soso' 
-              fontSize='sm' 
-              color="#F0F1F3" 
-              onClick={() => {
-                signOut();
-              }}
-            > 
-              Sair
-            </Text>
+            <Flex 
+              onClick={() => {signOut();}}
+              cursor={"pointer"}
+              w="90%"
+              h="30%"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Text 
+                fontWeight='soso' 
+                fontSize='sm' 
+                color="#F0F1F3" 
+              > 
+                Sair
+              </Text>
+            </Flex>
         </Flex>
       )}
     </>
