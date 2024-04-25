@@ -8,7 +8,6 @@ import CustomBox from '../../components/CustomBox'
 import * as Yup from "yup";
 import {
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react'
@@ -120,7 +119,6 @@ const Dependents = () => {
   };
 
   return (
-
     <Flex
       backgroundColor="#F0F1F3"
       width="36%"
@@ -152,7 +150,7 @@ const Dependents = () => {
         <Box width="40px" height="40px"></Box>
       </Flex>
       <Flex
-        height="50%"
+        height="60%"
         width="80%"
         flexDirection="column"
         alignItems="flex-start"
