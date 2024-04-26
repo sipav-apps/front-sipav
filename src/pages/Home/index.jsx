@@ -1,19 +1,37 @@
 import React, { useEffect, useState } from 'react'
 import { 
-  Flex, Button, Box,
-  Text
+  Flex,
+  Text,
+  Select
 } from '@chakra-ui/react'
 import { GoArrowRight } from 'react-icons/go'
 import DiseaseAPI from '../../services/DiseaseApi.jsx';
 import CustomBox from '../../components/CustomBox/index.jsx';
 import { useNavigate } from 'react-router-dom';
+import api from '../../services/Api';
 
 const Home = () => {
   const [diseases, setDiseases] = useState([])
+  const [user, setUser] = useState([])
+
+  const userData = JSON.parse(localStorage.getItem("@sipavUser"));
   
   const { getAllDiseases } = DiseaseAPI();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchUserData() {
+      try {
+        const response = await api.get(`/user/${userData.id}`);
+        setUser(response.data);
+      } catch (error) {
+        console.error('Erro ao buscar dados do usuário:', error);
+      }
+    }
+
+    fetchUserData();
+}, []);
 
   useEffect(() => {
     if (localStorage.getItem('@sipavAccessToken') === null) {
@@ -31,7 +49,19 @@ const Home = () => {
         }
       };
 
+      async function fetchUserData() {
+        try {
+          console.log('entrou')
+          const response = await api.get(`/user/${userData.id}`);
+          setUser(response.data);
+        } catch (error) {
+          console.error('Erro ao buscar dados do usuário:', error);
+        }
+      }
+
       fetchDiseases();
+
+      fetchUserData();
     }
 
   }, []);
@@ -53,6 +83,7 @@ const Home = () => {
         justifyContent="center"
         alignItems="center"
         w="80%"
+        flexDir="column"
       >
         <Text
           fontSize="xl"
@@ -61,6 +92,19 @@ const Home = () => {
         >
           Lista de vacinas
         </Text>
+        <Select
+          fontSize="xl"
+          color="primary.600"
+          fontWeight="semibold"
+          width="80%"
+          borderColor="primary.600"
+          mt="1rem"
+        >
+          <option value={user?.id}>{user.name}</option>
+          {user?.dependents?.map((dependent, index) => (
+            <option key={index} value={dependent?.id}>{dependent?.name}</option>
+          ))}
+        </Select>
       </Flex>
       <Flex
         height="100%"
@@ -97,15 +141,7 @@ const Home = () => {
           <CustomBox
             key={index}
             text={disease.name}
-            first image={
-              <GoArrowRight
-                size={30}
-                color='#088395'
-                cursor={"pointer"}
-                onClick={() => navigate(`/disease/${index+1 }`)}
-              />
-            }
-            secondImage={
+            firstImage={
               <GoArrowRight
                 size={30}
                 color='#088395'
