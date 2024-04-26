@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import DiseasesContext from '../../context/diseasesContext';
-import { Flex, HStack, Text } from '@chakra-ui/react';
+import { Box, Flex, HStack, StackDivider, Text, VStack } from '@chakra-ui/react';
 
 const Disease = () => {
   const navigate = useNavigate();
@@ -9,24 +9,23 @@ const Disease = () => {
   const { diseases } = useContext(DiseasesContext)
 
   const [currentDisease, setCurrentDisease] = useState();
-  
-  useEffect(() => {
-    if (!diseases[id-1]) {
 
-      navigate("/");
+  useEffect(() => {
+    if (!diseases[id - 1]) {
+      console.log(diseases)
+      // navigate("/");
     }
-    setCurrentDisease(diseases[id-1])
+    setCurrentDisease(diseases[id - 1])
   }, [])
 
   return (
-    <Flex 
-      width="100%" 
-      h="100%" 
-      flexDir="column" 
+    <Flex
+      width="100%"
+      h="full"
+      flexDir="column"
       alignItems="center"
-      jus
     >
-      <Text 
+      <Text
         fontSize="2xl"
         color="secondary.400"
         fontWeight="semibold"
@@ -35,136 +34,307 @@ const Disease = () => {
       >
         {currentDisease?.name}
       </Text>
-      <Flex width="100%" justifyContent="center">
-        <Flex
-          backgroundColor="#F0F1F3"
-          py={"2rem"}
-          borderRadius="30px"
-          flexDirection="column"
-          alignItems="center"
-          boxShadow="dark-lg"
-          px="3rem"
-          gap="1rem"
-        >
-          <HStack px="2rem" justifyContent="space-between" width="100%">
-            <Text 
-              fontSize="md"
-              color="primary.600"
-              fontWeight="semibold"
-              pb=".5rem"
-            >
-              Última dose tomada: 
-            </Text>
-            <Text
-              alignItems="flex-end"
-              fontSize="md"
-              color="primary.600"
-              fontWeight="semibold"
-              pb=".5rem"
-            >
-              Test
-            </Text>
-          </HStack>
-          <HStack px="2rem" justifyContent="space-between" width="100%">
-            <Text 
-              fontSize="md"
-              color="primary.600"
-              fontWeight="semibold"
-              pb=".5rem"
-            >
-              Vacina em dia: 
-            </Text>
-            <Text 
-              fontSize="md"
-              color="primary.600"
-              fontWeight="semibold"
-              pb=".5rem"
-            >
-              Test
-            </Text>
-          </HStack>
-          <HStack px="2rem" justifyContent="space-between" width="100%">
-            <Text 
-              fontSize="md"
-              color="primary.600"
-              fontWeight="semibold"
-              pb=".5rem"
-            >
-              Número de doses: 
-            </Text>
-            <Text 
-              fontSize="md"
-              color="primary.600"
-              fontWeight="semibold"
-              pb=".5rem"
-            >
-              {currentDisease?.doses_required}
-            </Text>
-          </HStack>
-          <HStack px="2rem" justifyContent="space-between" width="100%">
-            <Text 
-              fontSize="md"
-              color="primary.600"
-              fontWeight="semibold"
-              pb=".5rem"
-            >
-              Número de doses: 
-            </Text>
-            <Text 
-              fontSize="md"
-              color="primary.600"
-              fontWeight="semibold"
-              pb=".5rem"
-            >
-              {currentDisease?.interval_between_doses}
-            </Text>
-          </HStack>
-          <HStack px="2rem" justifyContent="space-between" width="100%">
-            <Text 
-              fontSize="md"
-              color="primary.600"
-              fontWeight="semibold"
-              pb=".5rem"
-            >
-              Contra indicações: 
-            </Text>
-            <Text 
-              fontSize="md"
-              color="primary.600"
-              fontWeight="semibold"
-              pb=".5rem"
-            >
-              {diseases[id-1]?.name}
-            </Text>
-          </HStack>
-        </Flex>
-        {/* <Flex
-          backgroundColor="#F0F1F3"
-          py={"2rem"}
-          borderRadius="30px"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          boxShadow="dark-lg"
-          px="3rem"
-        >
-          <Flex 
-            width="100%" 
-            alignItems="center" 
+      <HStack 
+        justifyContent="center"
+        width="100%" 
+        px="10%"
+        gap="6rem"
+        alignItems="flex-start"
+      >
+
+        <Flex width="100%" justifyContent="center">
+          <Flex
+            backgroundColor="#F0F1F3"
+            py={"2rem"}
+            borderRadius="30px"
             flexDirection="column"
+            alignItems="center"
             justifyContent="center"
+            boxShadow="dark-lg"
+            px="3rem"
+            width="100%"
           >
-            <Text 
-              fontSize="md"
-              color="primary.600"
+            <Text
+              fontSize="xl"
+              color="secondary.400"
               fontWeight="semibold"
-              pb=".5rem"
+              mb="2rem"
             >
-              A doença 
+              Vacina {diseases[id - 1]?.vaccine}
             </Text>
+            <VStack
+              divider={<StackDivider borderColor='gray.200' />}
+              spacing={4}
+              align='stretch'
+              width="100%"
+            >
+              <Flex alignItems="flex-start">
+                <Text
+                  fontSize="md"
+                  color="secondary.500"
+                  fontWeight="semibold"
+                  mr="1rem"
+                  textAlign="left" // Alinhe o rótulo fixo à direita
+                  width="150px"
+                >
+                  Vacina em dia:
+                </Text>
+                <Text
+                  fontSize="md"
+                  flex="1"
+                >
+                  Sim
+                </Text>
+              </Flex>
+              <Flex alignItems="flex-start">
+                <Text
+                  fontSize="md"
+                  color="secondary.500"
+                  fontWeight="semibold"
+                  mr="1rem"
+                  textAlign="left" // Alinhe o rótulo fixo à direita
+                  width="150px"
+                >
+                  Última dose tomada:
+                </Text>
+                <Text
+                  fontSize="md"
+                  flex="1"
+                >
+                  Sim
+                </Text>
+              </Flex>
+              <Flex alignItems="flex-start">
+                <Text
+                  fontSize="md"
+                  color="secondary.500"
+                  fontWeight="semibold"
+                  mr="1rem"
+                  textAlign="left" // Alinhe o rótulo fixo à direita
+                  width="150px"
+                >
+                  Número de doses:
+                </Text>
+                <Text
+                  fontSize="md"
+                  flex="1"
+                >
+                  {diseases[id - 1]?.doses_required}
+                </Text>
+              </Flex>
+              <Flex alignItems="flex-start">
+                <Text
+                  fontSize="md"
+                  color="secondary.500"
+                  fontWeight="semibold"
+                  mr="1rem"
+                  textAlign="left" // Alinhe o rótulo fixo à direita
+                  width="150px"
+                >
+                  Intervalo entre doses:
+                </Text>
+                <Text
+                  fontSize="md"
+                  flex="1"
+                  overflowX="auto"
+                  maxH="100px"
+                  sx={{
+                    "&::-webkit-scrollbar": {
+                      marginLeft: "1rem",
+                      width: "4px",
+                    },
+                    "&::-webkit-scrollbar-track": {
+                      background: "#f1f1f1",
+                    },
+                    "&::-webkit-scrollbar-thumb": {
+                      background: "#088395",
+                      borderRadius: "4px",
+                    },
+                    "&::-webkit-scrollbar-thumb:hover": {
+                      background: "#0A4D68",
+                    },
+                  }}
+                >
+                  {diseases[id - 1]?.interval_between_doses}
+                </Text>
+              </Flex>
+              <Flex alignItems="flex-start">
+                <Text
+                  fontSize="md"
+                  color="secondary.500"
+                  fontWeight="semibold"
+                  mr="1rem"
+                  textAlign="left" // Alinhe o rótulo fixo à direita
+                  width="150px"
+                >
+                  Contra indicações:
+                </Text>
+                <Text
+                  fontSize="md"
+                  flex="1"
+                  overflowX="auto"
+                  maxH="100px"
+                  sx={{
+                    "&::-webkit-scrollbar": {
+                      marginLeft: "1rem",
+                      width: "4px",
+                    },
+                    "&::-webkit-scrollbar-track": {
+                      background: "#f1f1f1",
+                    },
+                    "&::-webkit-scrollbar-thumb": {
+                      background: "#088395",
+                      borderRadius: "4px",
+                    },
+                    "&::-webkit-scrollbar-thumb:hover": {
+                      background: "#0A4D68",
+                    },
+                  }}
+                >
+                  {diseases[id - 1]?.contraindications}
+                </Text>
+              </Flex>
+            </VStack>
           </Flex>
-        </Flex> */}
-      </Flex>
+        </Flex>
+        <Flex width="100%" justifyContent="center">
+          <Flex
+            backgroundColor="#F0F1F3"
+            py={"2rem"}
+            borderRadius="30px"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            boxShadow="dark-lg"
+            px="3rem"
+            width="100%"
+          >
+            <Text
+              fontSize="xl"
+              color="secondary.400"
+              fontWeight="semibold"
+              mb="2rem"
+            >
+              A doença
+            </Text>
+            <VStack
+              divider={<StackDivider borderColor='gray.200' />}
+              spacing={4}
+              align='stretch'
+              width="100%"
+            >
+              <Flex alignItems="flex-start">
+                <Text
+                  fontSize="md"
+                  color="secondary.500"
+                  fontWeight="semibold"
+                  mr="1rem"
+                  textAlign="left" // Alinhe o rótulo fixo à direita
+                  width="150px"
+                >
+                  Informações:
+                </Text>
+                <Text
+                  fontSize="md"
+                  flex="1"
+                  overflowY="auto"
+                  maxH="150px"
+                  sx={{
+                    "&::-webkit-scrollbar": {
+                      marginLeft: "1rem",
+                      width: "4px",
+                    },
+                    "&::-webkit-scrollbar-track": {
+                      background: "#f1f1f1",
+                    },
+                    "&::-webkit-scrollbar-thumb": {
+                      background: "#088395",
+                      borderRadius: "4px",
+                    },
+                    "&::-webkit-scrollbar-thumb:hover": {
+                      background: "#0A4D68",
+                    },
+                  }}
+                >
+                  {diseases[id - 1]?.disease_info}
+                </Text>
+              </Flex>
+              <Flex alignItems="flex-start">
+                <Text
+                  fontSize="md"
+                  color="secondary.500"
+                  fontWeight="semibold"
+                  mr="1rem"
+                  textAlign="left" // Alinhe o rótulo fixo à direita
+                  width="150px"
+                >
+                  Sintomas:
+                </Text>
+                <Text
+                  fontSize="md"
+                  flex="1"
+                  overflowY="auto"
+                  maxH="150px"
+                  sx={{
+                    "&::-webkit-scrollbar": {
+                      marginLeft: "1rem",
+                      width: "4px",
+                    },
+                    "&::-webkit-scrollbar-track": {
+                      background: "#f1f1f1",
+                    },
+                    "&::-webkit-scrollbar-thumb": {
+                      background: "#088395",
+                      borderRadius: "4px",
+                    },
+                    "&::-webkit-scrollbar-thumb:hover": {
+                      background: "#0A4D68",
+                    },
+                  }}
+                >
+                  {diseases[id - 1]?.disease_info}
+                </Text>
+              </Flex>
+              <Flex alignItems="flex-start">
+                <Text
+                  fontSize="md"
+                  color="secondary.500"
+                  fontWeight="semibold"
+                  mr="1rem"
+                  textAlign="left" // Alinhe o rótulo fixo à direita
+                  width="150px"
+                  overflowY="auto"
+                  maxH="150px"
+                  sx={{
+                    "&::-webkit-scrollbar": {
+                      marginLeft: "1rem",
+                      width: "4px",
+                    },
+                    "&::-webkit-scrollbar-track": {
+                      background: "#f1f1f1",
+                    },
+                    "&::-webkit-scrollbar-thumb": {
+                      background: "#088395",
+                      borderRadius: "4px",
+                    },
+                    "&::-webkit-scrollbar-thumb:hover": {
+                      background: "#0A4D68",
+                    },
+                  }}
+                >
+                  Tratamento:
+                </Text>
+                <Text
+                  fontSize="md"
+                  flex="1"
+                >
+                  Test
+                </Text>
+              </Flex>
+            </VStack>
+          </Flex>
+        </Flex>
+      </HStack>
     </Flex>
   );
 }
