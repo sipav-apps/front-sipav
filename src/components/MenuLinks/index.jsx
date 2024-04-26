@@ -17,21 +17,29 @@ const MenuLinks = ({ isOpen }) => {
           direction={["column", "row", "row", "row"]}
           pt={[4, 4, 0, 0]}
         >
-          <MenuItem to="/account">Perfil</MenuItem>
+          {isAuthenticated && (
+            <>
+              <MenuItem to="/account">Perfil</MenuItem>
+              <MenuItem to="/dependents">Dependentes</MenuItem>
+            </>
+          )}
+          <MenuItem to="/">Mapa de postos de Saúde </MenuItem>
           <MenuItem to="/">Informações </MenuItem>
           {isAuthenticated ? (
-            <Button
-              onClick={() => signOut()}
-              size="sm"
-              rounded="md"
-              color={["secondary.600", "secondary.600", "white", "white"]}
-              bg={["white", "white", "#CA3433", "#CA3433"]}
-              _hover={{
-                bg: ["secondary.500", "secondary.500", "secondary.500", "#960019"]
-              }}
-            >
-              Sair
-            </Button>
+            <>
+              <Button
+                onClick={() => signOut()}
+                size="sm"
+                rounded="md"
+                color={["secondary.600", "secondary.600", "white", "white"]}
+                bg={["white", "white", "#CA3433", "#CA3433"]}
+                _hover={{
+                  bg: ["secondary.500", "secondary.500", "secondary.500", "#960019"]
+                }}
+              >
+                Sair
+              </Button>
+            </>
           ) : (
             <MenuItem to="/register" isLast>
               <Button
