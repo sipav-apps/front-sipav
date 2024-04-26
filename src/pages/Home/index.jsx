@@ -46,7 +46,8 @@ const Home = () => {
       flexDirection="column"
       alignItems="center"
       boxShadow="dark-lg"
-      height="30rem"
+      height="100%"
+      pb="1rem"
     >
       <Flex
         justifyContent="center"
@@ -54,10 +55,9 @@ const Home = () => {
         w="80%"
       >
         <Text
-          fontSize="2xl"
+          fontSize="xl"
           color="primary.600"
           fontWeight="semibold"
-          pb=".5rem"
         >
           Lista de vacinas
         </Text>
@@ -97,7 +97,15 @@ const Home = () => {
           <CustomBox
             key={index}
             text={disease.name}
-            rightImage={
+            first image={
+              <GoArrowRight
+                size={30}
+                color='#088395'
+                cursor={"pointer"}
+                onClick={() => navigate(`/disease/${index+1 }`)}
+              />
+            }
+            secondImage={
               <GoArrowRight
                 size={30}
                 color='#088395'
