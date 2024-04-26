@@ -1,7 +1,7 @@
 import { Box, Button, Flex, Text, Tooltip } from '@chakra-ui/react'
 import { Form, Formik } from 'formik'
 import React, { useEffect, useRef, useState } from 'react'
-import { BiNews, BiSolidEdit, BiUserCircle, BiUserPin } from 'react-icons/bi'
+import { BiNews, BiSolidEdit, BiSolidTrash, BiUserCircle, BiUserPin } from 'react-icons/bi'
 import { GoArrowLeft } from 'react-icons/go'
 import { useNavigate } from 'react-router-dom'
 import CustomBox from '../../components/CustomBox'
@@ -15,12 +15,14 @@ import CustomModal from '../../components/CustomModal'
 import api from '../../services/Api'
 import CustomInput from '../../components/CustomInput'
 import { CalendarIcon } from '@chakra-ui/icons'
+import DependentAPI from '../../services/DependentAPI'
 
 const Dependents = () => {
   const initialRef = useRef();
   const finalRef = useRef();
   const [isOpenEditModal, setIsOpenEditModal] = React.useState(false);
   const [isOpenAddModal, setIsOpenAddModal] = React.useState(false);
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = React.useState(false);
   const [currentEditDependent, setCurrentEditDependent] = React.useState(0);
   const [initialValuesEdit, setInitialValuesEdit] = React.useState(
     {
@@ -30,14 +32,20 @@ const Dependents = () => {
     }
   )
 
+  const {
+    getAllDependents, createDependent, updateDependent, deleteDependent
+  } = DependentAPI();
+
   const [user, setUser] = useState(null);
   const userData = JSON.parse(localStorage.getItem("@sipavUser"));
 
   useEffect(() => {
-    async function fetchUserData() {
+    const fetchUserData = async () => {
       try {
-        const response = await api.get(`/user/${userData.id}`);
-        setUser(response.data);
+        const currentUser = await getAllDependents(userData.id);
+
+        console.log(currentUser)
+        setUser(currentUser.data);
       } catch (error) {
         console.error('Erro ao buscar dados do usuário:', error);
       }
@@ -69,6 +77,15 @@ const Dependents = () => {
     setIsOpenAddModal(false);
   };
 
+  const handleOpenDeleteModal = (dependent) => {
+    setCurrentEditDependent(dependent.id);
+    setIsOpenDeleteModal(true);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setIsOpenDeleteModal(false);
+  };
+
   const navigate = useNavigate();
 
   const initialValuesAdd = {
@@ -88,33 +105,38 @@ const Dependents = () => {
   });
 
   async function addDependent(data) {
-    data.birthdate = new Date(data.birthdate)
-    try {
-      await api.post('user/', {
-        ...data,
-        isResponsible: false,
-        responsible_id: user.id
-      });
-      navigate(0);
+    const createdDependent = {
+      ...data,
+      isResponsible: false,
+      responsible_id: userData.id
     }
-    catch (error) {
-      throw error;
+    try {
+      await createDependent(createdDependent);
+      navigate(0);
+    } catch (error) {
+      console.error('Failed to create dependent:', error.message);
     }
   };
 
   async function editDependent(data) {
-    data.birthdate = new Date(data.birthdate)
-    console.log(data)
     try {
-      await api.put(`/user/${currentEditDependent}`, {
-        ...data,
-      });
-      navigate(0);
-    }
-    catch (error) {
+      await updateDependent(data, currentEditDependent);
       handleCloseEditModal()
+      navigate(0);
+    } catch (error) {
       setCurrentEditDependent(0)
-      throw error;
+      console.error('Failed to update product:', error.message);
+    }
+  };
+
+  async function removeDependent() {
+    try {
+      await deleteDependent(currentEditDependent);
+      handleCloseDeleteModal()
+      navigate(0);
+    } catch (error) {
+      setCurrentEditDependent(0)
+      console.error('Failed to delete product:', error.message);
     }
   };
 
@@ -129,25 +151,17 @@ const Dependents = () => {
       boxShadow="dark-lg"
     >
       <Flex
-        justifyContent="space-between"
+        justifyContent="center"
         w="80%"
       >
-        <GoArrowLeft
-          onClick={() => navigate(-1)}
-          alt='Voltar'
-          cursor={"pointer"}
-          size={40}
-          color='#088395'
-        />
         <Text
-          fontSize="2xl"
+          fontSize="xl"
           color="primary.600"
           fontWeight="semibold"
           pb=".5rem"
         >
           Seus Dependentes
         </Text>
-        <Box width="40px" height="40px"></Box>
       </Flex>
       <Flex
         height="60%"
@@ -162,7 +176,6 @@ const Dependents = () => {
         marginBottom="2rem"
         borderRadius="1rem"
         px="1rem"
-        py="1rem"
         sx={{
           "&::-webkit-scrollbar": {
             marginLeft: "1rem",
@@ -184,23 +197,34 @@ const Dependents = () => {
           <CustomBox
             key={index}
             text={dependent.name}
-            rightImage={
+            firstImage={
               <BiSolidEdit
-                size={40}
+                size={30}
                 color='#088395'
                 cursor={"pointer"}
                 onClick={() => handleOpenEditModal(dependent)}
+              />
+            }
+            secondImage={
+              <BiSolidTrash
+                size={30}
+                color='#088395'
+                cursor={"pointer"}
+                onClick={() => handleOpenDeleteModal(dependent)}
               />
             }
           />
         ))}
       </Flex>
       <Button
-        h="3rem"
-        w="70%"
+        type="submit"
+        p="1rem"
+        mb="2rem"
+        fontSize="md"
         borderRadius="30px"
-        borderColor="#E0E0E0"
         borderWidth=".2rem"
+        marginTop="1rem"
+        borderColor="#E0E0E0"
         color="#F0F1F3"
         variant="solid"
         backgroundColor="primary.600"
@@ -209,8 +233,6 @@ const Dependents = () => {
           backgroundColor: "primary.600",
           color: "#F0F1F3",
         }}
-        mb="2rem"
-        fontSize="md"
         onClick={handleOpenAddModal}
       >
         Adicionar Dependente
@@ -481,6 +503,47 @@ const Dependents = () => {
               </Flex>
             )}
           </Formik>
+        </ModalBody>
+      </CustomModal>
+      <CustomModal
+        isOpen={isOpenDeleteModal}
+        onClose={handleCloseDeleteModal}
+        initialRef={initialRef}
+        finalRef={finalRef}
+      >
+        <ModalBody>
+          <Flex
+            width="100%"
+            flexDirection="column"
+            alignItems="center"
+          >
+            <Text
+              fontSize="xl"
+              fontWeight="normal"
+              pb=".5rem"
+            >
+              Tem certeza que deseja excluir o dependente?
+            </Text>
+            <Flex
+              width="100%"
+              flexDirection="row"
+              alignItems="center"
+              justifyContent={"center"}
+              py={"1rem"}
+              gap={"3rem"}
+            >
+              <Button
+                onClick={() => removeDependent()}
+              >
+                Sim
+              </Button>
+              <Button
+                onClick={() => handleCloseDeleteModal()}
+              >
+                Não
+              </Button>
+            </Flex>
+          </Flex>
         </ModalBody>
       </CustomModal>
     </Flex>
