@@ -1,7 +1,7 @@
 import { Flex, Text } from '@chakra-ui/react';
 import React from 'react'
 
-const CustomBox = ({text, rightImage}) => {
+const CustomBox = ({text, firstImage, secondImage, ...props}) => {
   return (
     <Flex 
       width="100%"
@@ -13,6 +13,7 @@ const CustomBox = ({text, rightImage}) => {
       px="1rem"
       my="1rem"
       sx={{ boxShadow: '0px 0px 16px 1px grey'}}
+      {...props}
     >
       <Text 
           fontSize="md" 
@@ -23,7 +24,8 @@ const CustomBox = ({text, rightImage}) => {
         {text}
       </Text>
       <Flex minWidth="30px" alignItems="center">
-        {rightImage}
+        {firstImage}
+        {secondImage}
       </Flex>
     </Flex>
   )
