@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Flex } from "@chakra-ui/layout";
 import { Text, Divider, Button, Grid, GridItem, Checkbox, CheckboxGroup, Tooltip } from "@chakra-ui/react";
-import { CalendarIcon, EmailIcon, LockIcon } from '@chakra-ui/icons';
 import { Form, Formik } from 'formik';
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import CustomInput from '../../components/CustomInput/index.jsx';
 import { BiUserCircle, BiNews } from "react-icons/bi";
-import { FaTelegram, FaWhatsapp } from "react-icons/fa6";
+import { FiMail } from "react-icons/fi";
+import { FaTelegram, FaWhatsapp, FaLock, FaCalendar } from "react-icons/fa6";
 import useAuth from '../../services/useAuth.jsx';
 
 const Register = () => {
@@ -80,7 +80,7 @@ const Register = () => {
             <Flex
               as={Form}
               backgroundColor="#F0F1F3"
-              width="36%"
+              width="35%"
               pt={"2rem"}
               borderRadius="30px"
               flexDirection="column"
@@ -88,11 +88,12 @@ const Register = () => {
               boxShadow="dark-lg"
               onSubmit={handleSubmit}
               maxH={"90vh"}
+              px="5rem"
             >
               {step == 1 && (
                 <>
                   <Text
-                    fontSize="5xl"
+                    fontSize="3xl"
                     color="primary.600"
                     fontWeight="semibold"
                     pb=".5rem"
@@ -106,8 +107,8 @@ const Register = () => {
                     w={"15%"}
                   />
                   <Flex
+                    width="100%"
                     height="50%"
-                    width="70%"
                     flexDirection="column"
                     alignItems="flex-start"
                     justifyContent="flex-start"
@@ -135,7 +136,7 @@ const Register = () => {
                   >
                     <CustomInput
                       label="Nome"
-                      icon={<BiUserCircle className='custom-icon' />}
+                      icon={<BiUserCircle size={20} className='custom-icon' />}
                       name="name"
                       type="text"
                       placeholder="Digite seu nome completo"
@@ -148,7 +149,7 @@ const Register = () => {
 
                     <CustomInput
                       label="E-mail"
-                      icon={<EmailIcon color='gray.500' className='custom-icon' />}
+                      icon={<FiMail size={20} color='gray.500' className='custom-icon' />}
                       name="email"
                       type="email"
                       placeholder="Digite email para cadastro"
@@ -161,7 +162,7 @@ const Register = () => {
 
                     <CustomInput
                       label="CPF"
-                      icon={<BiNews color='gray.500' className='custom-icon' />}
+                      icon={<BiNews size={20} color='gray.500' className='custom-icon' />}
                       name="cpf"
                       type="text"
                       placeholder="Digite CPF para cadastro"
@@ -174,7 +175,7 @@ const Register = () => {
 
                     <CustomInput
                       label="Senha"
-                      icon={<LockIcon className='custom-icon' color='gray.500' />}
+                      icon={<FaLock size={20} className='custom-icon' color='gray.500' />}
                       name="password"
                       type="password"
                       placeholder="Digite sua senha para cadastro"
@@ -189,7 +190,7 @@ const Register = () => {
 
                     <CustomInput
                       label="Data de Nascimento"
-                      icon={<CalendarIcon className='custom-icon' color='gray.500' />}
+                      icon={<FaCalendar size={20} className='custom-icon' color='gray.500' />}
                       name="birthdate"
                       type="date"
                       placeholder="Selecione sua data de nascimento"
@@ -201,23 +202,22 @@ const Register = () => {
                     />
                   </Flex>
                   <Button
-                    h="3rem"
-                    w="10rem"
+                    type="submit"
+                    p="1rem"
+                    mb="2rem"
+                    fontSize="xl"
                     borderRadius="30px"
-                    borderColor="primary.600"
                     borderWidth=".2rem"
                     isDisabled={!isValid || !dirty}
-                    color="primary.600"
-                    variant="solid"
                     marginTop="1rem"
                     backgroundColor="transparent"
+                    color="primary.600"
+                    borderColor="primary.600"
                     transition="background-color 0.3s, color 0.3s"
                     _hover={(isValid && dirty) && {
                       backgroundColor: "primary.600",
                       color: "#F0F1F3",
                     }}
-                    mb="2rem"
-                    fontSize="2xl"
                     onClick={() => setStep(2)}
                   >
                     Cadastrar
@@ -225,14 +225,16 @@ const Register = () => {
                   <Text
                     color="primary.500"
                     mb="2rem"
+                    fontSize="sm"
                   >
                     Já possui uma conta? &nbsp;
                     <Text
                       as='u'
                       fontWeight="bold"
                       color="primary.600"
-                      onClick={() => navigate("/login")}
                       cursor="pointer"
+                      fontSize="sm"
+                      onClick={() => navigate("/login")}
                     >
                       Entre
                     </Text>
@@ -259,7 +261,7 @@ const Register = () => {
                       {username}
                     </Text> */}
                     <Text
-                      fontSize="24px"
+                      fontSize="xl"
                       color="primary.600"
                       fontWeight="semibold"
                       pb=".5rem"
@@ -301,23 +303,22 @@ const Register = () => {
 
                     <Button
                       type="submit"
-                      h="3rem"
-                      w="10rem"
+                      p="1rem"
+                      mb="2rem"
+                      fontSize="xl"
                       borderRadius="30px"
-                      borderColor="primary.600"
                       borderWidth=".2rem"
                       isDisabled={!isValid || !dirty}
-                      color="primary.600"
-                      variant="solid"
                       marginTop="1rem"
+                      variant="solid"
+                      borderColor="primary.600"
+                      color="primary.600"
                       backgroundColor="transparent"
                       transition="background-color 0.3s, color 0.3s"
                       _hover={(isValid && dirty) && {
                         backgroundColor: "primary.600",
                         color: "#F0F1F3",
                       }}
-                      my="2rem"
-                      fontSize="2xl"
                     >
                       <Tooltip
                         label="Você precisa alterar alguma informação"

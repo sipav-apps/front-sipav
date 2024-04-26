@@ -57,15 +57,16 @@ const Login = () => {
             <Flex
               as={Form}
               backgroundColor="#F0F1F3"
-              width="36%"
+              width="35%"
               pt={"2rem"}
               borderRadius="30px"
               flexDirection="column"
               alignItems="center"
               boxShadow="dark-lg"
+              px="5rem"
             >
               <Text
-                fontSize="5xl"
+                fontSize="3xl"
                 color="primary.600"
                 fontWeight="semibold"
                 pb=".5rem"
@@ -80,7 +81,7 @@ const Login = () => {
               />
               <Flex
                 height="50%"
-                width="70%"
+                width="100%"
                 flexDirection="column"
                 alignItems="flex-start"
                 justifyContent="flex-start"
@@ -114,17 +115,16 @@ const Login = () => {
                   errors={errors}
                 />
               </Flex>
-              <Flex justifyContent="flex-end" marginBottom="2rem" width="70%">
+              {/* <Flex justifyContent="flex-end" marginBottom="2rem" width="70%">
                 <Button variant="link">
-                  <Text as='u' fontWeight="bold" color="primary.600">
+                  <Text fontSize="sm" as='u' fontWeight="bold" color="primary.600">
                     Esqueceu a senha?
                   </Text>
                 </Button>
-              </Flex>
+              </Flex> */}
               <Button
                 type="submit"
-                h="3rem"
-                w="10rem"
+                p="1rem"
                 borderRadius="30px"
                 borderColor="primary.600"
                 borderWidth=".2rem"
@@ -139,21 +139,23 @@ const Login = () => {
                   color: "#F0F1F3",
                 }}
                 mb="2rem"
-                fontSize="2xl"
+                fontSize="xl"
               >
                 Login
               </Button>
               <Text
                 color="primary.500"
                 mb="2rem"
+                fontSize="sm"
               >
                 Não tem uma conta? &nbsp;
                 <Text
                   as='u'
                   fontWeight="bold"
                   color="primary.600"
-                  onClick={() => navigate("/register")}
                   cursor="pointer"
+                  fontSize="sm"
+                  onClick={() => navigate("/register")}
                 >
                   Cadastre-se
                 </Text>
