@@ -20,10 +20,10 @@ const RoutesComponent = () => {
                 flexDirection="column"
                 backgroundColor="primary.500"
                 alignItems="center"
-                h={"100vh"}
-                w={"100vw"}
+                h={"100%"}
+                minH={"100vh"}
+                w={"100%"}
               >
-        
                 <Header /> 
                 <Home /> 
               </Flex>
@@ -35,8 +35,9 @@ const RoutesComponent = () => {
                 flexDirection="column"
                 backgroundColor="primary.500"
                 alignItems="center"
-                h={"100vh"}
-                w={"100vw"}
+                h={"100%"}
+                minH={"100vh"}
+                w={"100%"}
               >
                 <Header />
                 <Profile /> 
@@ -49,8 +50,9 @@ const RoutesComponent = () => {
                 flexDirection="column"
                 backgroundColor="primary.500"
                 alignItems="center"
-                h={"100vh"}
-                w={"100vw"}
+                h={"100%"}
+                w={"100%"}
+                minH={"100vh"}
               >
                 <Header />
                 <Dependents />
@@ -63,8 +65,9 @@ const RoutesComponent = () => {
                 flexDirection="column"
                 backgroundColor="primary.500"
                 alignItems="center"
-                h={"100vh"}
-                w={"100vw"}
+                h={"100%"}
+                w={"100%"}
+                minH={"100vh"}
               >
                 <Header />
                 <Disease />
