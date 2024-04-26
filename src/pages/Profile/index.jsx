@@ -85,25 +85,18 @@ const Profile = () => {
           maxH={"70vh"}
         >
           <Flex
-            justifyContent="space-between"
+            justifyContent="center"
             w="80%"
+            alignItems="center"
           >
-            <GoArrowLeft 
-              onClick={() => navigate(-1)}
-              alt='Voltar' 
-              cursor={"pointer"}
-              size={40}
-              color='#088395'
-            />
             <Text
-              fontSize="2xl"
+              fontSize="xl"
               color="primary.600"
               fontWeight="semibold"
               pb=".5rem"
             >
               Dados
             </Text>
-            <Box width="40px" height="40px"></Box>
           </Flex>
           <Flex
             height="50%"
@@ -111,7 +104,7 @@ const Profile = () => {
             flexDirection="column"
             alignItems="flex-start"
             justifyContent="flex-start"
-            mt="3rem"
+            mt="2rem"
             overflowY="auto"
             maxH="400px"
             marginBottom="2rem"
@@ -189,23 +182,22 @@ const Profile = () => {
           </Flex>
           <Button
             type="submit"
-            h="3rem"
-            w="10rem"
+            p="1rem"
+            mb="2rem"
+            fontSize="xl"
             borderRadius="30px"
-            borderColor="primary.600"
             borderWidth=".2rem"
             isDisabled={!isValid || !dirty}
+            marginTop="1rem"
             color="primary.600"
             variant="solid"
-            marginTop="1rem"
             backgroundColor="transparent"
+            borderColor="primary.600"
             transition="background-color 0.3s, color 0.3s"
             _hover={(isValid && dirty) && {
               backgroundColor: "primary.600",
               color: "#F0F1F3",
             }}
-            mb="1rem"
-            fontSize="2xl"
           >
             <Tooltip
               label="Você precisa alterar alguma informação"
@@ -215,27 +207,6 @@ const Profile = () => {
             >
               Salvar
             </Tooltip>
-          </Button>
-          <Button
-            h="3rem"
-            w="60%"
-            borderRadius="30px"
-            borderColor="#E0E0E0"
-            borderWidth=".2rem"
-            color="#F0F1F3"
-            variant="solid"
-            marginTop="1rem"
-            backgroundColor="primary.600"
-            transition="background-color 0.3s, color 0.3s"
-            _hover={(isValid && dirty) && {
-              backgroundColor: "primary.600",
-              color: "#F0F1F3",
-            }}
-            mb="2rem"
-            fontSize="md"
-            onClick={() => navigate("/dependents")}
-          >
-            Gerenciar Dependentes
           </Button>
         </Flex>
         )}
