@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { 
+import {
   Flex,
   Text,
   Select
@@ -12,26 +12,15 @@ import api from '../../services/Api';
 
 const Home = () => {
   const [diseases, setDiseases] = useState([])
-  const [user, setUser] = useState([])
+  const [user, setUser] = useState()
+  const [currentUser, setCurrentUser] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
   const userData = JSON.parse(localStorage.getItem("@sipavUser"));
-  
+
   const { getAllDiseases } = DiseaseAPI();
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    async function fetchUserData() {
-      try {
-        const response = await api.get(`/user/${userData.id}`);
-        setUser(response.data);
-      } catch (error) {
-        console.error('Erro ao buscar dados do usuário:', error);
-      }
-    }
-
-    fetchUserData();
-}, []);
 
   useEffect(() => {
     if (localStorage.getItem('@sipavAccessToken') === null) {
@@ -41,10 +30,12 @@ const Home = () => {
         try {
           const diseasesData = await getAllDiseases();
 
-          console.log(diseasesData)
+          console.log('aqui', diseasesData)
 
-          setDiseases(diseasesData);
+          setDiseases(diseasesData.data);
+          setIsLoading(false);
         } catch (error) {
+
           console.error('Failed to fetch diseases:', error.message);
         }
       };
@@ -54,6 +45,8 @@ const Home = () => {
           console.log('entrou')
           const response = await api.get(`/user/${userData.id}`);
           setUser(response.data);
+          setCurrentUser(response.data);
+          setIsLoading(false);
         } catch (error) {
           console.error('Erro ao buscar dados do usuário:', error);
         }
@@ -65,6 +58,23 @@ const Home = () => {
     }
 
   }, []);
+
+  const handleUserChange = (event) => {
+    const selectedUserId = event.target.value;
+  
+    if (isLoading) { // Handle loading state
+      return;
+    }
+  
+    console.log(typeof selectedUserId); // Log data type for debugging
+    const selectedUser = user?.dependents?.find(dependent => dependent.id === Number(selectedUserId)); // Ensure consistent data types
+    console.log(selectedUser);
+    setCurrentUser(selectedUser);
+  };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Flex
@@ -92,19 +102,21 @@ const Home = () => {
         >
           Lista de vacinas
         </Text>
-        <Select
-          fontSize="xl"
+        {/* <Select
+          fontSize="md"
           color="primary.600"
           fontWeight="semibold"
-          width="80%"
+          width="50%"
           borderColor="primary.600"
           mt="1rem"
+          onChange={handleUserChange}
+          value={currentUser?.id}
         >
-          <option value={user?.id}>{user.name}</option>
+          <option value={user?.id}>{user?.name}</option>
           {user?.dependents?.map((dependent, index) => (
             <option key={index} value={dependent?.id}>{dependent?.name}</option>
           ))}
-        </Select>
+        </Select> */}
       </Flex>
       <Flex
         height="100%"
@@ -146,7 +158,7 @@ const Home = () => {
                 size={30}
                 color='#088395'
                 cursor={"pointer"}
-                onClick={() => navigate(`/disease/${index+1 }`)}
+                onClick={() => navigate(`/disease/${disease.id}/user/${currentUser.id}`)}
               />
             }
           />
