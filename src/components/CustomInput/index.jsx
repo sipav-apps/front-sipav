@@ -41,6 +41,7 @@ const CustomInput = ({ icon, label, type, show, handleClick, touched, errors, ..
               type={type === "password" ? (show ? "text" : "password") : type}
               max={type === 'date' ? today : undefined} // Handle non-date types gracefully
               height="2.5rem"
+              value={field.value || ""} // Definir um valor padrão
             />
             {type === "password" && (
               <InputRightElement h="full" width="4.5rem">
