@@ -1,4 +1,4 @@
-import api from '../services/Api'
+import api from './Api'
 
 const DependentAPI = () => {
     const getAllDependents = async (userId) => {
@@ -15,7 +15,7 @@ const DependentAPI = () => {
             // const responseData = await response.json();
     
             return response;
-        } catch (error: any) {
+        } catch (error) {
             console.error('Failed to fetch dependents:', error.message);
             throw error;
         }
@@ -52,7 +52,7 @@ const DependentAPI = () => {
             await api.put(`/user/${id}`, data);
         
             return
-        } catch (error: any) {
+        } catch (error) {
             console.error('Create dependent error:', error.message);
             throw error;
         }
@@ -70,7 +70,7 @@ const DependentAPI = () => {
             await api.delete(`/user/${id}`);
 
             return
-        } catch (error: any) {
+        } catch (error) {
             console.error('Delete dependent error:', error.message);
             throw error;
         }
