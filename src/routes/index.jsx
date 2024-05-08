@@ -8,6 +8,7 @@ import { Flex } from "@chakra-ui/react";
 import Dependents from "../pages/Dependents";
 import Disease from "../pages/Disease";
 import Header from "../components/Header";
+import HealthCenter from "../pages/HealthCenter";
 
 const RoutesComponent = () => {
   return (
@@ -71,6 +72,21 @@ const RoutesComponent = () => {
               >
                 <Header />
                 <Disease />
+              </Flex>
+            } 
+          />
+          <Route exect path={PathRoutes.HEALTHCENTERS} 
+            element={
+              <Flex
+                flexDirection="column"
+                backgroundColor="primary.500"
+                alignItems="center"
+                h={"100%"}
+                w={"100%"}
+                minH={"100vh"}
+              >
+                <Header />
+                <HealthCenter />
               </Flex>
             } 
           />

@@ -23,7 +23,7 @@ const MenuLinks = ({ isOpen }) => {
               <MenuItem to="/dependents">Dependentes</MenuItem>
             </>
           )}
-          <MenuItem to="/">Mapa de postos de Saúde </MenuItem>
+          <MenuItem to="/health-centers">Mapa de Postos de Saúde </MenuItem>
           <MenuItem to="/">Informações </MenuItem>
           {isAuthenticated ? (
             <>

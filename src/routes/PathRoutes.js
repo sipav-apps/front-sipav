@@ -5,7 +5,8 @@ const PathRoutes = {
   INFO: "/info",
   PROFILE: "/account",
   DEPENDENTS: "/dependents",
-  DISEASE: "/disease/:id"
+  DISEASE: "/disease/:diseaseId/user/:userId",
+  HEALTHCENTERS: "/health-centers"
 };
 
 export default PathRoutes;
