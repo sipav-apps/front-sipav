@@ -9,8 +9,8 @@ const Logo = (props) => {
       {...props}
     >
       <Text 
-        fontSize="2xl"
-        color="primary.500"
+        fontSize="3xl"
+        color="secondary.300"
         fontWeight="semibold"
         onClick={() => navigate("/")}
         cursor="pointer"
