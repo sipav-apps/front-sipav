@@ -1,5 +1,7 @@
+import api from '../services/Api'
+
 const DiseaseAPI = () => {
-    const getAllDiseases = async () => {
+    const getAllDiseases = async (userId) => {
         try {
             const token = localStorage.getItem('@sipavAccessToken');
 
@@ -7,26 +9,35 @@ const DiseaseAPI = () => {
                 throw new Error('Authorization token not found');
             }
 
+            const response = await api.get(`/disease`);
 
-            const allDiseasesUrl = 'http://localhost:8000/diseases/';
-    
-            const response = await fetch(allDiseasesUrl);
-    
-            if (!response.ok) {
-
-                throw new Error(`Failed to fetch diseases: ${response.status} ${response.statusText}`);
-            }
-
-            const responseData = await response.json();
-    
-            return responseData;
+            return response;
         } catch (error) {
             console.error('Failed to fetch diseases:', error.message);
             throw error;
         }
     };
 
-    return {getAllDiseases}
+    const getDiseaseAndVaccine = async (id, userId) => {
+        try {
+            const token = localStorage.getItem('@sipavAccessToken');
+
+            if (!token) {
+                throw new Error('Authorization token not found');
+            }
+
+            const response = await api.get(`/disease/${id}/user=${userId}`);
+
+            return response;
+        }
+        catch (error) {
+            console.error('Failed to fetch disease:', error.message);
+            throw error;
+        }
+
+    }
+
+    return { getAllDiseases, getDiseaseAndVaccine }
 }
 
 export default DiseaseAPI
