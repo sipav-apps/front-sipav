@@ -1,8 +1,7 @@
-import { Box, Button, Flex, Text, Tooltip } from '@chakra-ui/react'
+import { Button, Flex, Text, Tooltip } from '@chakra-ui/react'
 import { Form, Formik } from 'formik'
 import React, { useEffect, useRef, useState } from 'react'
-import { BiNews, BiSolidEdit, BiSolidTrash, BiUserCircle, BiUserPin } from 'react-icons/bi'
-import { GoArrowLeft } from 'react-icons/go'
+import { BiNews, BiSolidEdit, BiSolidTrash, BiUserCircle } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 import CustomBox from '../../components/CustomBox'
 import * as Yup from "yup";
@@ -12,7 +11,6 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import CustomModal from '../../components/CustomModal'
-import api from '../../services/Api'
 import CustomInput from '../../components/CustomInput'
 import { CalendarIcon } from '@chakra-ui/icons'
 import DependentAPI from '../../services/DependentAPI'
@@ -172,7 +170,7 @@ const Dependents = () => {
         mt="1rem"
         overflowY="auto"
         maxH="300px"
-        minH="100px"
+        // minH="80px"
         marginBottom="2rem"
         borderRadius="1rem"
         px="1rem"
@@ -193,7 +191,7 @@ const Dependents = () => {
           },
         }}
       >
-        {user?.dependents.map((dependent, index) => (
+        {user?.dependents?.length > 0 ? (user?.dependents?.map((dependent, index) => (
           <CustomBox
             key={index}
             text={dependent.name}
@@ -214,7 +212,21 @@ const Dependents = () => {
               />
             }
           />
-        ))}
+        ))) : (
+          <Flex
+            justifyContent="center"
+            w="full"
+          >
+            <Text
+              fontSize="md"
+              color="secondary.600"
+              fontWeight="semibold"
+              pb=".5rem"
+            >
+              Você não possui dependentes
+            </Text>
+          </Flex>
+        )}
       </Flex>
       <Button
         type="submit"
